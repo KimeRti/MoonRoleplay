@@ -1,0 +1,195 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Moon Roleplay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="{% static 'main/fonts/Gilroy/stylesheet.css' %}" rel="stylesheet">
+    <link href="{% static 'main/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'main/css/reset.css' %}" rel="stylesheet">
+    <link href="{% static 'main/' %}css/responsive.css" rel="stylesheet">
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+    <link rel="preload" href="{% static 'main/images/bg-bottom.png' %}" as="image">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m, e, t, r, i, k, a) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(71732944, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+
+    </script>
+    <noscript>
+        <div><img src="watch/71732944/1.gif" style="position:absolute; left:-9999px;" alt=""></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '119746243362778');
+        fbq('track', 'PageView');
+
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=119746243362778&ev=PageView&noscript=1"></noscript>
+    <meta name="enot" content="1891656600027XjcovrV6Okx1S9lY1iLoYF1s-1AevN5O">
+    <!-- End Facebook Pixel Code -->
+</head>
+
+<body>
+    <section class="overflowing">
+        <section class="head">
+            <div class="bg-box">
+                <i class="bg-head-1" data-paroller-factor="0.22" data-paroller-type="foreground" data-paroller-direction="vertical" data-paroller-transition="all 0s ease-in"><img src="{% static 'main/images/bg-top.png' %}" alt=""></i>
+                <i class="bg-head-2" data-paroller-factor="-0.1" data-paroller-type="foreground" data-paroller-direction="vertical"><img src="{% static 'main/images/bg-middle.png' %}" alt=""></i>
+                <i class="bg-head-3"><img src="{% static 'main/images/bg-bottom.png' %}" alt=""></i>
+            </div>
+            <div class="topline">
+                <a href="index.html" class="logo-box animated fadeInLeft waittwo"><img src="{% static 'main/images/moonrpanayazi.png' %}" alt="">
+                    <h1>Grand Theft Auto V<br>Çok Oyunculu</h1>
+                </a>
+                <button data-micromodal-trigger="modal-how" class="orange-button animated fadeInRight waitthree">Oynamaya Başla</button>
+            </div>
+            <div class="middle-box animated fadeIn waitonem">
+                <h2>Kendi <br>benzersiz hikayenizi oluşturun.</h2>
+                <ul class="main-menu">
+                    <li><a href="#how">Nasıl Başlanır?</a></li>
+                    <li><a href="{% url 'forum' %}" target="_blank">Forum</a></li>
+                    <li><a href="" target="_blank">Haberler</a></li>
+                    <li><a href="" target="_blank">Mağaza</a></li>
+                    <li><a href="" target="_blank">Bağış Yap</a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="how" id="how">
+            <div id="how-anchor"></div>
+            <div class="main-width flex-center">
+                <div class="steps-wrap">
+                    <div data-paroller-factor="0.16" data-paroller-type="foreground" data-paroller-direction="vertical">
+                        <p class="step-title">Lisanslı GTA 5 satın alın ve kurun</p>
+                        <p><a href="app/271590/Grand_Theft_Auto_V/index.htm">Steam</a> veya <a href="https://www.epicgames.com/store/ru/product/grand-theft-auto-v/home">Epic Games</a>'ten</p>
+                        <div class="step-preview">
+                            <img src="{% static 'main/images/how-bg-1.jpg' %}" alt="">
+                            <img src="{% static 'main/images/how-m-1.png' %}" alt="">
+                        </div>
+                        <i>1</i>
+                    </div>
+                    <div data-paroller-factor="0.32" data-paroller-type="foreground" data-paroller-direction="vertical">
+                        <p class="step-title">Launcher'ımızı indirin</p>
+                        <p><a href="" target="_blank">Launcher'ı</a> indirin</p>
+                        <div class="step-preview">
+                            <img src="{% static 'main/images/how-bg-2.jpg' %}" alt="">
+                            <img src="{% static 'main/images/how-m-2.png' %}" alt="">
+                        </div>
+                        <i>2</i>
+                    </div>
+                </div>
+            </div>
+            <div class="text-box" data-paroller-factor="0.10" data-paroller-type="foreground" data-paroller-direction="vertical">
+                <p>ONYX, GTA 5'e dayanan heyecan verici ve eğlenceli bir çok oyunculu projedir.<br><br>Sunucumuzun oyun deneyimine dalın ve tüm oyun rollerini deneyimleyin! Yasayı takip edin ve polis, barışçıl bir iş insanı, belediye başkanı olun veya sokak kurallarına uyun ve suçun yanında yer alın!<br><br>Birçok örgüt ve işyeri, iş sahiplerinin fikirlerini yönetmelerine ve geliştirmelerine izin veren düşünülmüş bir altyapı, tonlarca benzersiz eşya, araba ve etkinlik. Gerçek hayata yakın, iletişim, yeni arkadaşlar, örgütler ve daha fazlası ile dolu bir oyun! Tüm bunlar ONYX RP'de sizi bekliyor.</p>
+            </div>
+        </section>
+        <section class="s-lines">
+            <div class="main-width">
+                <div class="title-wrap">
+                    <h2>Hikaye Çizgileri</h2>
+                </div>
+                <div class="s-wrapper">
+                    <div class="s-line s-line-right">
+                        <div class="s-text-box">
+                            <h3>Skid<br><strong>Row</strong></h3>
+                            <p>Herkes dürüst bir yaşam sürmek ve toplumun keyfi yasalarına uymak istemez. Neden kendi kurallarınızı oluşturmayasınız ki? Bu sözler size hitap ediyorsa, bu sizin için bir yol. Yoksul bir mahalle sakinini oynayın ve sokakta nasıl yaşandığını yaşayın.<br><br>Suç otoriteleriyle tanışın, merdivenin en altından başlayın ve suç dünyasının zirvesine çıkın. Bölgenizi kontrol altında tutarak çetenizi yönetin.</p>
+                        </div>
+                        <i class="s-bg"><img src="{% static 'main/images/s-bg-1.jpg' %}" alt=""></i>
+                        <i class="s-man"><img src="{% static 'main/images/s-man-1.png' %}" alt=""></i>
+                    </div>
+                    <div class="s-line s-line-left">
+                        <div class="s-text-box">
+                            <h3>American<br><strong>Dream</strong></h3>
+                            <p>Siz dürüst çalışma ve kendi başınıza her şeyi başarma hayaline inanıyor musunuz? Öyleyse Amerikan rüyası size göre. Kendi çabalarınızla iyi bir iş bulun ve yaşamınızı istediğiniz gibi yaşayın. Çalışma maymunu insanı insana dönüştürdü, bunu unutmayın.</p>
+                        </div>
+                        <i class="s-bg"><img src="{% static 'main/images/s-bg-2.jpg' %}" alt=""></i>
+                        <i class="s-man"><img src="{% static 'main/images/s-man-2.png' %}" alt=""></i>
+                    </div>
+                    <div class="s-line s-line-right">
+                        <span class="fly-bage">Görev yok</span>
+                        <div class="s-text-box">
+                            <h3>Lavish<br><strong>Lifestyle</strong></h3>
+                            <p>Hayatta denemek istediğiniz yeni şeyler olabilir. Ve bir kez yaşadığımıza göre, bunu ertelememeliyiz. Kulüpler, gece hayatı ve yüksek hızlar sizin için yaratıldı. Ancak her şeyin bir bedeli vardır ve son çılgın gece gezintinizde her şeyinizi kaybettiniz.<br><br>Başarınızın tesadüfi olmadığına inanıyorsanız ve eski lüks arabalarınız, en iyi işletmeleriniz, özel giysileriniz ve bununla ilişkilendirilen her şey için eski yaşamınıza geri dönmek istiyorsanız, o zaman yolculuğunuza tepeden tırnağa başlayın.</p>
+                        </div>
+                        <i class="s-bg"><img src="{% static 'main/images/s-bg-3.jpg' %}" alt=""></i>
+                        <i class="s-man"><img src="{% static 'main/images/s-man-3.png' %}" alt=""></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="title-wrap">
+            <h2>Atmosfere Dalın</h2>
+        </div>
+        <section class="screenshots">
+            <div class="main-width">
+                <div class="screenshots-grid">
+                    <div>
+                        <p><strong>Kendi çetenizi seçin</strong><br>getto tepesinde olmak</p><img src="{% static 'main/images/screenshots/i-1.png' %}" alt="">
+                    </div>
+                    <div>
+                        <p>Pilot lisansı alın<br><strong>pilot lisansı</strong></p><img src="{% static 'main/images/screenshots/i-2.png' %}" alt="">
+                    </div>
+                    <div>
+                        <p><strong>Bir bankayı soyun</strong><br>kendi mafyanla</p><img src="{% static 'main/images/screenshots/i-3.png' %}" alt="">
+                    </div>
+                    <div>
+                        <p>Kendi<br><strong>iş imparatorluğunu</strong> kurun</p><img src="{% static 'main/images/screenshots/i-4.png' %}" alt="">
+                    </div>
+                    <div>
+                        <p><strong>Yarış Pistinde</strong><br>kendi yarış takımınızla</p><img src="{% static 'main/images/screenshots/i-5.png' %}" alt="">
+                    </div>
+                    <div>
+                        <p><strong>Benzersiz Kıyafetler</strong><br>her zaman en iyisi</p><img src="{% static 'main/images/screenshots/i-6.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+    </section>
+    <script src="{% static 'main/js/micromodal.min.js' %}"></script>
+    <script src="{% static 'main/js/jquery.min.js' %}"></script>
+    <script src="{% static 'main/js/jquery.paroller.min.js' %}"></script>
+    <script src="{% static 'main/js/main.js' %}"></script>
+</body>
+
+</html>

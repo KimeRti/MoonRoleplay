@@ -1,0 +1,24 @@
+<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.0809326 9.25947C0.0809326 14.3736 4.22622 18.5186 9.34167 18.5186C14.4548 18.5186 18.6011 14.3736 18.6011 9.25947C18.6011 4.14501 14.4548 5.13403e-05 9.34167 5.13403e-05C4.22622 5.13403e-05 0.0809326 4.14501 0.0809326 9.25947Z" fill="url(#paint0_linear)"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
+<path d="M0.0809326 9.25947C0.0809326 14.3736 4.22622 18.5186 9.34167 18.5186C14.4548 18.5186 18.6011 14.3736 18.6011 9.25947C18.6011 4.14501 14.4548 5.13403e-05 9.34167 5.13403e-05C4.22622 5.13403e-05 0.0809326 4.14501 0.0809326 9.25947Z" fill="url(#paint1_linear)"/>
+</mask>
+<g mask="url(#mask0)">
+<path d="M18.6182 15.2104H0.0993042V18.5161H18.6182V15.2104Z" fill="black"/>
+<path d="M18.5998 7.28477H0.0809326V11.248H18.5998V7.28477ZM18.5998 3.32249H0.0809326V0.00146539H18.5998V3.32249Z" fill="url(#paint2_radial)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0.0812622" y1="9.26573" x2="18.5998" y2="9.26573" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FAA61A"/>
+<stop offset="1" stop-color="#FFE100"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="0.0812622" y1="9.26573" x2="18.5998" y2="9.26573" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FAA61A"/>
+<stop offset="1" stop-color="#FFE100"/>
+</linearGradient>
+<radialGradient id="paint2_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.5147 6.36043) scale(5.61471 5.61456)">
+<stop stop-color="#363738"/>
+<stop offset="1"/>
+</radialGradient>
+</defs>
+</svg>

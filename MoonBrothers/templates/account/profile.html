@@ -1,0 +1,500 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/niceselectpicker/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/slick/slick-theme.css' %}">
+    <!-- icon css-->
+    <link rel="stylesheet" href="{% static 'assets/elagent-icon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/animation/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <title>Profil | {{ request.user.first_name }}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        // URL'deki anlık sayfa hash'ine göre tabları aç veya kapat
+        var hash = window.location.hash;
+        if (hash) {
+            $('.nav-link').removeClass('active');
+            $('.tab-pane').removeClass('show active');
+            $('.nav-link[href="' + hash + '"]').addClass('active');
+            $(hash).addClass('show active');
+        }
+
+        // Tablara tıklama işlemleri
+        $('.nav-link').on('click', function (e) {
+            e.preventDefault();
+            $('.nav-link').removeClass('active');
+            $('.tab-pane').removeClass('show active');
+            $(this).addClass('active');
+            $($(this).attr('href')).addClass('show active');
+            window.location.hash = $(this).attr('href');
+        });
+    });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchbox');
+
+        searchInput.addEventListener('input', function() {
+            const searchQuery = this.value.trim();
+            if (searchQuery.length > 0) {
+                searchPosts(searchQuery);
+            }
+        });
+
+        function searchPosts(query) {
+            const url = `/search/?q=${encodeURIComponent(query)}`;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Arama sorgusu sırasında bir hata oluştu');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displaySearchResults(data.posts);
+                })
+                .catch(error => {
+                    console.error('Hata:', error);
+                });
+        }
+
+        function displaySearchResults(posts) {
+            const resultList = document.getElementById('search-results');
+            resultList.innerHTML = '';
+            posts.forEach(post => {
+                const listItem = document.createElement('li');
+                listItem.textContent = post.title;
+                resultList.appendChild(listItem);
+            });
+        }
+    });
+    </script>
+</head>
+
+<body data-scroll-animation="true">
+    {% include '_partials/_navbar.html' %}
+    <div class="body_wrapper">
+        {% include '_partials/_navbar.html' %}
+        <section class="doc_banner_area single_breadcrumb">
+            <ul class="list-unstyled banner_shap_img">
+                <li><img src="{% static 'img/new/banner_shap1.png' %}" alt=""></li>
+                <li><img src="{% static 'img/new/banner_shap4.png' %}" alt=""></li>
+                <li><img src="{% static 'img/new/banner_shap3.png' %}" alt=""></li>
+                <li><img src="{% static 'img/new/banner_shap2.png' %}" alt=""></li>
+                <li><img data-parallax='{"x": -180, "y": 80, "rotateY":2000}' src="{% static 'img/new/plus1.png' %}" alt=""></li>
+                <li><img data-parallax='{"x": -50, "y": -160, "rotateZ":200}' src="{% static 'img/new/plus2.png' %}" alt=""></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="container">
+                <div class="doc_banner_content">
+                    <h2 class="text-white">{{ request.user.first_name }}</h2>
+                    <ul class="nav justify-content-center">
+                        <li><a href="#">Home</a></li>
+                        <li><a class="active" href="#">Profile Member</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!--================Forum Content Area =================-->
+        <section class="forum-user-wrapper">
+            <div class="container">
+                <div class="row forum_main_inner">
+                    <div class="col-lg-3">
+                        <div class="author_option">
+                            <div class="author_img">
+                                {% if profile.profile_picture %}
+                                <img class="img-fluid" src="{{ profile.profile_picture.url }}" alt="">
+                                {% endif %}
+                            </div>
+                            <ul class="nav nav-tabs flex-column" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                        aria-controls="home" aria-selected="true">
+                                        <i class="icon_profile"></i> Profil
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#opentopics" role="tab"
+                                        aria-controls="profile" aria-selected="false">
+                                        <i class="icon_documents"></i> Açık Konularım
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#closedtopics" role="tab"
+                                        aria-controls="profile" aria-selected="false">
+                                        <i class="icon_documents"></i> Kapalı Konularım
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#preparingtopics" role="tab"
+                                        aria-controls="profile" aria-selected="false">
+                                        <i class="icon_documents"></i> Beklemede Olan Konularım
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#editprofile" role="tab"
+                                        aria-controls="profile" aria-selected="false">
+                                        <i class="icon_documents"></i> Profili Düzenle
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#changepass" role="tab"
+                                        aria-controls="contact" aria-selected="false">
+                                        <i class="icon_chat"></i> Şifre Değiştir
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="forum_body_area">
+                            <div class="forum_topic_list">
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="profile_info">
+                                        <div class="row p_info_item_inner">
+                                            <div class="col-sm-4">
+                                                <div class="p_info_item">
+                                                    <img src="img/icon/p-icon-1.png" alt="">
+                                                    <a href="#">
+                                                        <h4>Forum Role</h4>
+                                                    </a>
+                                                    <a class="info_btn" href="#">Keymaster</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="p_info_item">
+                                                    <img src="img/icon/p-icon-2.png" alt="">
+                                                    <a href="#">
+                                                        <h4>Topics Started</h4>
+                                                    </a>
+                                                    <a class="info_number" href="#">32</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="p_info_item">
+                                                    <img src="img/icon/p-icon-3.png" alt="">
+                                                    <a href="#">
+                                                        <h4>Replies Created</h4>
+                                                    </a>
+                                                    <a class="info_number" href="#">76</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="navbar-nav info_list">
+                                                <li><span>İsim:</span><a href="#">{{ profile.user.first_name }}</a></li>
+                                                <li><span>Email:</span><a href="#">{{ profile.user.email }}</a></li>
+                                                <li><span>Hesap Oluşturma Tarihi:</span><a href="#">{{ profile.user.date_joined }}</a></li>
+                                            </ul>
+                                        <ul class="nav p_social">
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="opentopics" role="tabpanel" aria-labelledby="profile-tab">
+                                        <h2 style="color:green">Onaylanan Konularım</h2>
+                                        <div class="forum_l_inner">
+                                            <div class="forum_body">
+                                                <ul class="navbar-nav topic_list">
+                                                    {% for post in approved_posts %}
+                                                    <li>
+                                                        <div class="media">
+                                                            <div class="d-flex">
+                                                                <img class="rounded-circle" src="{% static 'img/forum/user-1.png' %}" alt="">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="t_title">
+                                                                    <a href="#">
+                                                                        <h4>{{ post.title }}</h4>
+                                                                    </a>
+                                                                </div>
+                                                                <a href="#">
+                                                                    <h6><img src="{% static 'img/icon/f-icon-1.png' %}" alt=""> {{ post.category }}</h6>
+                                                                </a>
+                                                                <h6><i class="icon_calendar"></i> {{ post.modified_date }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="list_pagination d-flex justify-content-between">
+                                            <div class="left">
+                                                <p>Viewing {{ approved_posts.start_index }} - {{ approved_posts.end_index }} topics - {{ approved_posts.paginator.count }} total</p>
+                                            </div>
+                                            <div class="right">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        {% for num in approved_posts.paginator.page_range %}
+                                                            {% if num == approved_posts.number %}
+                                                                <li class="page-item active">
+                                                                    <span class="page-link">{{ num }}</span>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?approved_page={{ num }}">{{ num }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="closedtopics" role="tabpanel" aria-labelledby="profile-tab">
+                                        <h2 style="color:red">Reddedilen Konularım</h2>
+                                        <div class="forum_l_inner">
+                                            <div class="forum_body">
+                                                <ul class="navbar-nav topic_list">
+                                                    {% for post in rejected_posts %}
+                                                    <li>
+                                                        <div class="media">
+                                                            <div class="d-flex">
+                                                                <img class="rounded-circle" src="{% static 'img/forum/user-1.png' %}" alt="">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="t_title">
+                                                                    <a href="#">
+                                                                        <h4>{{ post.title }}</h4>
+                                                                    </a>
+                                                                </div>
+                                                                <a href="#">
+                                                                    <h6><img src="{% static 'img/icon/f-icon-1.png' %}" alt=""> {{ post.category }}</h6>
+                                                                </a>
+                                                                <h6><i class="icon_calendar"></i> {{ post.modified_date }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="list_pagination d-flex justify-content-between">
+                                            <div class="left">
+                                                <p>Viewing {{ rejected_posts.start_index }} - {{ rejected_posts.end_index }} topics - {{ rejected_posts.paginator.count }} total</p>
+                                            </div>
+                                            <div class="right">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        {% for num in rejected_posts.paginator.page_range %}
+                                                            {% if num == rejected_posts.number %}
+                                                                <li class="page-item active">
+                                                                    <span class="page-link">{{ num }}</span>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?rejected_page={{ num }}">{{ num }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="preparingtopics" role="tabpanel" aria-labelledby="profile-tab">
+                                        <h2 style="color:orangered">Beklemede Olan Konularım</h2>
+                                        <div class="forum_l_inner">
+                                            <div class="forum_body">
+                                                <ul class="navbar-nav topic_list">
+                                                    {% for post in pending_posts %}
+                                                    <li>
+                                                        <div class="media">
+                                                            <div class="d-flex">
+                                                                <img class="rounded-circle" src="{% static 'img/forum/user-1.png' %}" alt="">
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="t_title">
+                                                                    <a href="#">
+                                                                        <h4>{{ post.title }}</h4>
+                                                                    </a>
+                                                                </div>
+                                                                <a href="#">
+                                                                    <h6><img src="{% static 'img/icon/f-icon-1.png' %}" alt=""> {{ post.category }}</h6>
+                                                                </a>
+                                                                <h6><i class="icon_calendar"></i> {{ post.modified_date }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="list_pagination d-flex justify-content-between">
+                                            <div class="left">
+                                                <p>Viewing {{ pending_posts.start_index }} - {{ pending_posts.end_index }} topics - {{ pending_posts.paginator.count }} total</p>
+                                            </div>
+                                            <div class="right">
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination">
+                                                        {% for num in pending_posts.paginator.page_range %}
+                                                            {% if num == pending_posts.number %}
+                                                                <li class="page-item active">
+                                                                    <span class="page-link">{{ num }}</span>
+                                                                </li>
+                                                            {% else %}
+                                                                <li class="page-item">
+                                                                    <a class="page-link" href="?pending_page={{ num }}">{{ num }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade " id="editprofile" role="tabpanel" aria-labelledby="contact-tab">
+                                       <div class="profile_info">
+                                            <div class="row p_info_item_inner">
+                                                <div class="col-sm-4">
+                                                    <div class="p_info_item">
+                                                        <img src="img/icon/p-icon-1.png" alt="">
+                                                        <a href="#">
+                                                            <h4>Forum Role</h4>
+                                                        </a>
+                                                        <a class="info_btn" href="#">Keymaster</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="p_info_item">
+                                                        <img src="img/icon/p-icon-2.png" alt="">
+                                                        <a href="#">
+                                                            <h4>Topics Started</h4>
+                                                        </a>
+                                                        <a class="info_number" href="#">32</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="p_info_item">
+                                                        <img src="img/icon/p-icon-3.png" alt="">
+                                                        <a href="#">
+                                                            <h4>Replies Created</h4>
+                                                        </a>
+                                                        <a class="info_number" href="#">76</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul class="navbar-nav info_list">
+                                                <li><span>İsim:</span><a href="#">Lance Bogrol</a></li>
+                                                <li><span>Age:</span><a href="#">32</a></li>
+                                                <li><span>Gender:</span><a href="#">Male</a></li>
+                                                <li><span>Location:</span><a href="#">Berlin</a></li>
+                                                <li><span>Biographical Info:</span><a href="#">Trusted by thousands of
+                                                        customers,
+                                                        our unique themes, templates</a></li>
+                                                <li><span>Website: </span><a
+                                                        href="#">https://html.spider-themes.com/Docy/</a></li>
+                                                <li><span>Blog:</span><a
+                                                        href="#">https://wp.spider-themes.com/Docy/</a></li>
+                                                <li><span>Registered:</span><a href="#">3 years, 6 months ago</a></li>
+                                            </ul>
+                                            <ul class="nav p_social">
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade " id="changepass" role="tabpanel">
+                                        <div class="profile_info">
+                                            <div class="row p_info_item_inner">
+                                                <div class="col-sm-4">
+                                                    <div class="p_info_item">
+                                                        <img src="img/icon/p-icon-1.png" alt="">
+                                                        <a href="#">
+                                                            <h4>Forum Role</h4>
+                                                        </a>
+                                                        <a class="info_btn" href="#">Keymaster</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="p_info_item">
+                                                        <img src="img/icon/p-icon-2.png" alt="">
+                                                        <a href="#">
+                                                            <h4>Topics Started</h4>
+                                                        </a>
+                                                        <a class="info_number" href="#">32</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="p_info_item">
+                                                        <img src="img/icon/p-icon-3.png" alt="">
+                                                        <a href="#">
+                                                            <h4>Replies Created</h4>
+                                                        </a>
+                                                        <a class="info_number" href="#">76</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul class="navbar-nav info_list">
+                                                <li><span>Name:</span><a href="#">Lance Bogrol</a></li>
+                                                <li><span>Age:</span><a href="#">32</a></li>
+                                                <li><span>Gender:</span><a href="#">Male</a></li>
+                                                <li><span>Location:</span><a href="#">Berlin</a></li>
+                                                <li><span>Biographical Info:</span><a href="#">Trusted by thousands of
+                                                        customers,
+                                                        our unique themes, templates</a></li>
+                                                <li><span>Website: </span><a
+                                                        href="#">https://html.spider-themes.com/Docy/</a></li>
+                                                <li><span>Blog:</span><a
+                                                        href="#">https://wp.spider-themes.com/Docy/</a></li>
+                                                <li><span>Registered:</span><a href="#">3 years, 6 months ago</a></li>
+                                            </ul>
+                                            <ul class="nav p_social">
+                                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================End Forum Content Area =================-->
+        {% include '_partials/_footer.html' %}
+    </div>
+
+    <!-- Back to top button -->
+    <a id="back-to-top" title="Back to Top"></a>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/pre-loader.js' %}"></script>
+    <script src="{% static 'js/jquery.parallax-scroll.js' %}"></script>
+    <script src="{% static 'assets/niceselectpicker/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/wow/wow.min.js' %}"></script>
+    <script src="{% static 'assets/mcustomscrollbar/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <script src="{% static 'https://unpkg.com/ionicons@5.2.3/dist/ionicons.js' %}"></script>
+    <script src="{% static 'assets/magnify-pop/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'https://unpkg.com/ionicons@5.4.0/dist/ionicons.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="https://kit.fontawesome.com/6de39ab37f.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
