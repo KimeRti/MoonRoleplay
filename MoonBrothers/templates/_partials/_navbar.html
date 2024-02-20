@@ -16,10 +16,10 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link dropdown-toggle">İletişim</a>
                         </li>
-                       
+
                             {% if request.user.is_authenticated == True %}
                                 <div class="right-nav">
-                                    <a class="nav_btn tp_btn" href="">
+                                    <a class="nav_btn tp_btn" href="{% url 'profil' %}">
                                         <i class="fa-solid fa-user"></i>Profil
                                     </a>
                                     <a class="nav_btn tp_btn" href="{% url 'logout' %}">
