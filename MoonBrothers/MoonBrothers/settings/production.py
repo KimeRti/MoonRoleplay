@@ -4,6 +4,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.deryamakine.com', 'deryamakine.com']
 
+SECURE_SSL_REDIRECT = False
+
 STATIC_ROOT = 'MoonBrothers/static/'
 
 DATABASES = {
