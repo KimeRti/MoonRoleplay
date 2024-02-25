@@ -2,9 +2,8 @@ from .base import *
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.deryamakine.com', 'deryamakine.com']
+ALLOWED_HOSTS = ['5.180.106.89:8000']
 
-SECURE_SSL_REDIRECT = False
 
 STATIC_ROOT = 'MoonBrothers/static/'
 
