@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['5.180.106.89']
+ALLOWED_HOSTS = ['5.180.106.89','moonroleplaytr.com','www.moonroleplaytr.com']
 
 STATIC_ROOT = 'MoonBrothers/static/'
 
