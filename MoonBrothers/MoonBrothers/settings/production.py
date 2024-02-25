@@ -13,7 +13,7 @@ DATABASES = {
 
         'NAME': 'moonrp',
 
-        'USER': 'detex',
+        'USER': 'detexuser',
 
         'PASSWORD': 'detex123',
 
