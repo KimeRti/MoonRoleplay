@@ -46,8 +46,9 @@
 
             <div class="container-fluid custom-container">
                 <div class="custom-container">
-                
+
                 <!-- /.answer-action -->
+                {% if message == True %}
                 <div class="alert media message_alert {% if messagetype == 'error' %}alert-danger{% elif messagetype == 'success' %}alert-success{% endif %} fade show" role="alert">
                     <i class="icon_close_alt2"></i>
                     <div class="media-body">
@@ -58,6 +59,7 @@
                         </button>
                     </div>
                 </div>
+                {% endif %}
                 <div class="post-header forums-header">
                     <div class="col-md-6 col-sm-6 support-info">
                         <span> Forum </span>
