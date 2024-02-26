@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['5.180.106.89','moonroleplaytr.com','www.moonroleplaytr.com']
 
