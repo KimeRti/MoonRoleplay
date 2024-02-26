@@ -46,24 +46,18 @@
 
             <div class="container-fluid custom-container">
                 <div class="custom-container">
-                <div class="answer-action shadow">
-                    <div class="action-content">
-                        <div class="image-wrap">
-                            <img src="{% static 'img/home_support/answer.png' %}" alt="answer action">
-                        </div>
-                        <div class="content">
-                            <h2 class="ans-title">Aradığını bulamadın mı ?</h2>
-                            <p> Bir konu aç </p>
-                        </div>
-                    </div>
-                    <!-- /.action-content -->
-                    <div class="action-button-container">
-                        <a href="{% url 'createpost' %}" class="action_btn btn-ans">Konu Aç</a>
-                    </div>
-                    <!-- /.action-button-container -->
-                </div>
+                
                 <!-- /.answer-action -->
-
+                <div class="alert media message_alert {% if messagetype == 'error' %}alert-danger{% elif messagetype == 'success' %}alert-success{% endif %} fade show" role="alert">
+                    <i class="icon_close_alt2"></i>
+                    <div class="media-body">
+                        <h5>{{ messagetitle }}</h5>
+                        <p>{{ messagecontent }}</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="icon_close"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="post-header forums-header">
                     <div class="col-md-6 col-sm-6 support-info">
                         <span> Forum </span>

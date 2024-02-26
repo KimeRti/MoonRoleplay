@@ -33,6 +33,18 @@
                         <div class="text-center">
                             <a href="{% url 'home' %}"><img src="{% static 'img/moonlogo.png' %}" alt="upper" style="height: 40%; width: 40%;"></a>
                         </div>
+                        {% if message == True %}
+                        <div class="alert media message_alert {% if messagetype == 'error' %}alert-danger{% elif messagetype == 'success' %}alert-success{% endif %} fade show" role="alert">
+                            <i class="icon_close_alt2"></i>
+                            <div class="media-body">
+                                <h5>{{ messagetitle }}</h5>
+                                <p>{{ messagecontent }}</p>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <i class="icon_close"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {% endif %}
                         <form method="POST" class="row login_form">
                             {% csrf_token %}
                             <div class="col-lg-12 form-group">

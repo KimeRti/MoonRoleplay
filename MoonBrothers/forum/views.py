@@ -67,15 +67,18 @@ def CreatePost(request):
             category = get_object_or_404(Category, pk=category_id)
             post = Post(title=title, content=content, category=category,author=request.user)
             post.save()
-            data={
+            categories = Category.objects.all()
+            data = {
                 'message': True,
-                'message_title':' Konu Oluşturuldu',
-                'message_content': title + 'Başlıklı Konunuz Başarıyla Oluşturuldu'
+                'messagetitle':' Konu Oluşturuldu',
+                'messagetype':'success',
+                'messagecontent': title + 'Başlıklı Konunuz Başarıyla Oluşturuldu',
+                'categories': categories
             }
-            return redirect('/forum/posts/'+category_id, data)
+            return render(request,'forum/forum_index.html', data)
 
         return render(request,'forum/forum-createpost.html',data)
-    return redirect('home')
+    return redirect('forum')
 
 
 def PostDetail(request, pk):

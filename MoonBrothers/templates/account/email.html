@@ -32,8 +32,29 @@
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
                             <img src="{% static 'img/moonlogo.png' %}" alt="upper" style="height: 25%; width: 25%;">
-                            <h3>Moon Roleplay</h3>
-                            <h1>Emailinize Aktivasyon linki gönderildi</h1>
+                            {% if active == True %}
+
+                            	<a href="{% url 'forum' %}"><h3 style="color:green;">{{ success }}</h3></a>
+
+                            {% elif errorr == True %}
+
+                                <h1 style="color:red;"> {{ error }} </h1>
+                                <form method="POST" action="{% url 'sendmail' %}">
+                                {% csrf_token %}
+                                    <button class="action_btn btn_bg" type="submit"> Maili Tekrar Gönderin </button>
+                                </form>
+
+                            {% else %}
+
+                                <h1>Emailinize Aktivasyon linki gönderildi</h1>
+                                <h3>Mail Gelmedi mi ?</h3>
+
+                                <form method="POST" action="{% url 'sendmail' %}">
+                                {% csrf_token %}
+                                    <button class="action_btn btn_bg" type="submit"> Maili Tekrar Gönderin </button>
+                                </form>
+
+                            {% endif %}
                         </div>
                     </div>
                 </div>

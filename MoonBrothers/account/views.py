@@ -19,6 +19,23 @@ from django.contrib.auth.tokens import default_token_generator
 account_activation_token: object = default_token_generator
 
 
+def SendMail(request):
+    current_site = get_current_site(request)
+    mail_subject = 'Hesabınızı aktifleştirin.'
+    message = render_to_string('account/acc_active_email.html', {
+        'user': request.user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(request.user.pk)),
+        'token': account_activation_token.make_token(request.user),
+    })
+    to_email = request.user.email
+    email = EmailMessage(
+        mail_subject, message, to=[to_email]
+    )
+    email.send()
+    return render(request, "account/email.html", {"success": "Aktivasyon linki mailinize gönderildi."})
+
+
 def signin(request):
     if request.method == "POST":
         print(request.POST)
@@ -36,17 +53,23 @@ def signin(request):
             else:
                 return redirect('home')
         else:
-            return render(request, 'account/signin.html', {'error': 'Kullanıcı adı veya şifre hatalı'})
+            data = {
+                'message': True,
+                'messagetype': 'error',
+                'messagetitle': 'Hata',
+                'messagecontent': 'Kullanıcı adı veya şifre hatalı',
+            }
+            return render(request, 'account/signin.html', data)
 
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("forum")
 
     return render(request, "account/signin.html")
 
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect("home")
+        return redirect("forum")
     if request.method == "POST":
         FormFirstName = request.POST.get('firstname')
         Formusername = request.POST.get('username')
@@ -55,14 +78,26 @@ def register(request):
         Formrepassword = request.POST.get('repassword')
         if Formpassword == Formrepassword:
             if User.objects.filter(username=Formusername).exists():
-                return render(request, "account/signup.html",
-                              {"error": "Bu kullanıcı adı daha önceden alınmış lütfen farklı bir kullanıcı adı giriniz",
-                               "firstname": FormFirstName, "email": Formemail})
+                data = {
+                    'message':True,
+                    'messagetype':'error',
+                    'messagetitle':'Hata',
+                    'messagecontent':'Bu kullanıcı adı daha önceden alınmış lütfen farklı bir kullanıcı adı giriniz',
+                    "firstname": FormFirstName,
+                    "email": Formemail
+                }
+                return render(request, "account/signup.html",data)
             else:
                 if User.objects.filter(email=Formemail).exists():
-                    return render(request, "account/signin.html",
-                                  {"error": "Bu email ile daha önceden kayıt olunmuş!", "username": Formusername,
-                                   "firstname": FormFirstName})
+                    data = {
+                        'message': True,
+                        'messagetype': 'error',
+                        'messagetitle': 'Hata',
+                        'messagecontent': 'Bu email ile daha önceden kayıt olunmuş!',
+                        "firstname": FormFirstName,
+                        "username": Formusername,
+                    }
+                    return render(request, "account/signin.html",data)
                 else:
                     user = User.objects.create_user(first_name=FormFirstName,
                                                     username=Formusername, email=Formemail, password=Formpassword,
@@ -83,7 +118,13 @@ def register(request):
                     email.send()
                     return render(request, "account/email.html", {"success": "Aktivasyon linki mailinize gönderildi."})
         else:
-            return render(request, "account/signup.html", {"error": "Şifreler eşleşmiyor!"})
+            data = {
+                'message': True,
+                'messagetype': 'error',
+                'messagetitle': 'Hata',
+                'messagecontent': 'Şifreler eşleşmiyor!',
+            }
+            return render(request, "account/signup.html", data)
     return render(request, "account/signup.html")
 
 
@@ -97,7 +138,8 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return render(request, 'account/email.html', {"success": "Hesabınız başarıyla aktif edildi. Giriş yapabilirsiniz.", "active": True})
+        login(request, user)
+        return render(request, 'account/email.html', {"success": "Hesabınız başarıyla aktif edildi. Tıklayarak forum sayfasına geçebilirsiniz", "active": True})
     else:
         return render(request, 'account/email.html', {"error": "Aktivasyon linki geçersiz!", 'errorr': True})
 
@@ -145,7 +187,7 @@ def profile(request):
             'pending_posts': pending_posts,
         }
         return render(request, "account/profile.html", data)
-    return redirect("home")
+    return redirect("forum")
 
 
 def password_reset_request(request):
@@ -175,4 +217,4 @@ def password_reset_request(request):
 
 def logout_request(request):
     logout(request)
-    return redirect("home")
+    return redirect("forum")
