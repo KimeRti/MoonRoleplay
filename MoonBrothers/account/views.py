@@ -80,6 +80,7 @@ def register(request):
                     email = EmailMessage(
                         mail_subject, message, to=[to_email]
                     )
+                    email.send()
                     return render(request, "account/email.html", {"success": "Aktivasyon linki mailinize gönderildi."})
         else:
             return render(request, "account/signup.html", {"error": "Şifreler eşleşmiyor!"})

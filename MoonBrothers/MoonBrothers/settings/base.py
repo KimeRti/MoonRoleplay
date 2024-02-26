@@ -118,10 +118,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'info@deryamakine.com'
-EMAIL_HOST_PASSWORD = 'deryainfo123'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'info@deryamakine.com'
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'merterli_ahmet18@hotmail.com'
+EMAIL_HOST_PASSWORD = 'xsmtpsib-c5cd218495ff879f4cb9b60f487feb03c5b96f1c1338e2e9446f2e1e305596ec-G0s9xgFSA3hDHzY8'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'info@moonroleplaytr.com'

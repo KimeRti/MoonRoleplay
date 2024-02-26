@@ -14,21 +14,11 @@
     <link rel="stylesheet" href="{% static 'assets/animation/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/style-main.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-    <title>Docy</title>
+    <title>Mail Gönderildi</title>
 </head>
 
 <body data-scroll-animation="true">
-    <div id="preloader">
-        <div id="ctn-preloader" class="ctn-preloader">
-            <div class="round_spinner">
-                <div class="spinner"></div>
-                <div class="text">
-                    <img src="{% static 'img/moonlogoay.png' %}" alt="" style="width: 70%; height: 70%;">
-                    <h4><span>Moon Roleplay</span></h4>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include '_partials/_spinner.html' %}
     <div class="body_wrapper">
         <section class="signup_area signup_area_height">
             <div class="row ml-0 mr-0">
@@ -41,7 +31,7 @@
                 <div class="sign_right signup_right">
                     <div class="sign_inner signup_inner">
                         <div class="text-center">
-                            <img src="{% static 'img/moonlogoay.png' %}" alt="upper" style="height: 25%; width: 25%;">
+                            <img src="{% static 'img/moonlogo.png' %}" alt="upper" style="height: 25%; width: 25%;">
                             <h3>Moon Roleplay</h3>
                             <h1>Emailinize Aktivasyon linki gönderildi</h1>
                         </div>
