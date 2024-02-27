@@ -19,13 +19,18 @@ def PostChangeStatus(status, post_id):
     post.status = status
     post.save()
 
+
 def ForumPosts(request, pk):
     category = get_object_or_404(Category, pk=pk)
     adminposts = Post.objects.filter(category=category, author__is_superuser=True)
-    if request.user.is_superuser:
-        posts = Post.objects.filter(category=category)
-    else:
-        posts = Post.objects.filter(category=category, author=request.user)
+
+    if request.user.is_authenticated:  # Kullanıcı giriş yapmışsa
+        if request.user.is_superuser:
+            posts = Post.objects.filter(category=category)
+        else:
+            posts = Post.objects.filter(category=category, author=request.user)
+    else:  # Kullanıcı giriş yapmamışsa
+        posts = Post.objects.none()  # Hiçbir gönderi gösterme
 
     # Pagination işlemleri
     paginator = Paginator(posts, 10)  # Sayfa başına 10 öğe
